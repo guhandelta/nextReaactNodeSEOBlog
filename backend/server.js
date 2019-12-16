@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
+const blogRoutes = require('../routes/blog')
+
 const app = express()
 
 // db
@@ -24,6 +26,8 @@ app.use(cookieParser())
 if (process.env.NODE_ENV == 'development') {
     app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
+// Routes middleware
+app.use('/api', blogRoutes);
 //Routes
 app.get('/api', (req, res) => {
     res.json({ time: Date().toString() })
